@@ -33,8 +33,31 @@ class PropertyService {
       });
       
       const url = `${this.baseUrl}?${searchParams.toString()}`;
-      const response = await apiService.get<PagedResult<PropertyDto>>(url);
-      return response.data;
+      console.log('Fetching properties from:', url);
+      
+      const result = await apiService.get<PagedResult<PropertyDto>>(url);
+      console.log('API response result:', result);
+      console.log('Result type:', typeof result);
+      console.log('Result keys:', Object.keys(result || {}));
+      
+      // Verificar si tiene la estructura correcta
+      if (result && typeof result === 'object') {
+        if ('items' in result && 'total' in result) {
+          console.log('✅ Correct PagedResult structure found');
+          console.log('Items count:', result.items?.length || 0);
+          console.log('Total:', result.total);
+          return result;
+        } else {
+          console.log('❌ Unexpected response structure:', result);
+          // Intentar extraer de una posible envoltura
+          if ('data' in result && (result as any).data) {
+            console.log('🔄 Trying to extract from wrapper');
+            return (result as any).data as PagedResult<PropertyDto>;
+          }
+        }
+      }
+      
+      return result;
     } catch (error) {
       console.error('Error searching properties:', error);
       if (error instanceof Error) {
@@ -59,8 +82,8 @@ class PropertyService {
       });
       
       const url = `${this.baseUrl}/all?${params.toString()}`;
-      const response = await apiService.get<PagedResult<PropertyDto>>(url);
-      return response.data;
+      const result = await apiService.get<PagedResult<PropertyDto>>(url);
+      return result;
     } catch (error) {
       console.error('Error getting all properties:', error);
       throw error;
@@ -69,8 +92,8 @@ class PropertyService {
 
   async getPropertyById(id: string): Promise<PropertyDto> {
     try {
-      const response = await apiService.get<PropertyDto>(`${this.baseUrl}/${id}`);
-      return response.data;
+      const result = await apiService.get<PropertyDto>(`${this.baseUrl}/${id}`);
+      return result;
     } catch (error) {
       console.error('Error getting property by id:', error);
       throw error;
@@ -79,8 +102,8 @@ class PropertyService {
 
   async createProperty(dto: CreatePropertyDto): Promise<PropertyDto> {
     try {
-      const response = await apiService.post<PropertyDto>(this.baseUrl, dto);
-      return response.data;
+      const result = await apiService.post<PropertyDto>(this.baseUrl, dto);
+      return result;
     } catch (error) {
       console.error('Error creating property:', error);
       throw error;
@@ -89,8 +112,8 @@ class PropertyService {
 
   async updateProperty(id: string, dto: UpdatePropertyDto): Promise<PropertyDto> {
     try {
-      const response = await apiService.put<PropertyDto>(`${this.baseUrl}/${id}`, dto);
-      return response.data;
+      const result = await apiService.put<PropertyDto>(`${this.baseUrl}/${id}`, dto);
+      return result;
     } catch (error) {
       console.error('Error updating property:', error);
       throw error;

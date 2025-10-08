@@ -121,6 +121,13 @@ export interface ModalProps {
   size?: 'sm' | 'md' | 'lg' | 'xl';
 }
 
+// API Response type
+export interface ApiResponse<T> {
+  data: T;
+  message?: string;
+  success: boolean;
+}
+
 // Table types
 export interface TableColumn<T> {
   key: keyof T;
