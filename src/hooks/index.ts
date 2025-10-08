@@ -85,3 +85,4 @@ export function useToggle(initialValue = false) {
 
 // Re-export property hooks
 export * from './useProperties';
+export * from './usePropertyCRUD';

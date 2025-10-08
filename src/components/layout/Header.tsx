@@ -30,6 +30,7 @@ const Header: React.FC<HeaderProps> = ({
     { name: 'Propiedades', href: '/properties' },
     { name: 'Acerca de', href: '/about' },
     { name: 'Contacto', href: '/contact' },
+    { name: 'Admin', href: '/admin/properties' },
   ];
 
   return (

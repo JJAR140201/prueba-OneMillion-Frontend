@@ -4,16 +4,50 @@ export interface PropertyDto {
   name: string;
   address: string;
   price: number;
+  idOwner: string;
+  codeInternal: string;
+  year: number;
   description?: string;
   bedrooms?: number;
   bathrooms?: number;
-  area?: number;
+  squareMeters?: number;
   propertyType?: 'House' | 'Apartment' | 'Condo' | 'Townhouse' | 'Commercial';
-  status?: 'Available' | 'Sold' | 'Rented' | 'Pending';
+  status?: 'Available' | 'Sold' | 'Reserved';
   imageUrl?: string;
   images?: string[];
   createdAt: string;
   updatedAt: string;
+}
+
+export interface CreatePropertyDto {
+  name: string;
+  address: string;
+  price: number;
+  idOwner: string;
+  codeInternal: string;
+  year: number;
+  description?: string;
+  imageUrl?: string;
+  bedrooms?: number;
+  bathrooms?: number;
+  squareMeters?: number;
+  propertyType?: 'House' | 'Apartment' | 'Condo' | 'Townhouse' | 'Commercial';
+}
+
+export interface UpdatePropertyDto {
+  name?: string;
+  address?: string;
+  price?: number;
+  idOwner?: string;
+  codeInternal?: string;
+  year?: number;
+  description?: string;
+  imageUrl?: string;
+  bedrooms?: number;
+  bathrooms?: number;
+  squareMeters?: number;
+  propertyType?: 'House' | 'Apartment' | 'Condo' | 'Townhouse' | 'Commercial';
+  status?: 'Available' | 'Sold' | 'Reserved';
 }
 
 export interface PropertySearchQuery {
@@ -21,6 +55,13 @@ export interface PropertySearchQuery {
   address?: string;
   minPrice?: number;
   maxPrice?: number;
+  idOwner?: string;
+  codeInternal?: string;
+  year?: number;
+  minYear?: number;
+  maxYear?: number;
+  sortBy?: string;
+  sortOrder?: 'asc' | 'desc';
   page: number;
   pageSize: number;
 }

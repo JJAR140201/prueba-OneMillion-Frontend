@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Layout } from './components';
-import { HomePage, AboutPage, ContactPage, PropertiesPage } from './pages';
+import { HomePage, AboutPage, ContactPage, PropertiesPage, PropertyManagementPage } from './pages';
 
 function App() {
   // Datos de usuario simulados (en una app real vendrían de un contexto o estado global)
@@ -19,6 +19,7 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/properties" element={<PropertiesPage />} />
+          <Route path="/admin/properties" element={<PropertyManagementPage />} />
           {/* Rutas adicionales se pueden agregar aquí */}
           <Route path="*" element={
             <div className="min-h-screen flex items-center justify-center">
